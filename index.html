@@ -1,0 +1,586 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Good Thought Everyday — MindBloom</title>
+
+  <!-- Google fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --muted:#6f6f7a;
+      --accent:#7cc3a5;
+      --card-bg: rgba(255,255,255,0.85);
+      --glass: rgba(255,255,255,0.55);
+      --success:#2f9e6b;
+      --danger:#d9534f;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:"Poppins",system-ui,-apple-system,"Segoe UI",Roboto,Arial;
+      color:#183227;
+      background: linear-gradient(120deg,#cfeee2,#fff6ea,#e9e3fb);
+      background-size:300% 300%;
+      animation: bgFlow 18s ease infinite;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      transition:background 0.45s, color 0.35s;
+    }
+    @keyframes bgFlow{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+
+    .page{min-height:100vh;display:flex;flex-direction:column;gap:18px;padding:18px;}
+
+    /* Header */
+    header.site-header{
+      display:flex;align-items:center;justify-content:space-between;
+      gap:12px;padding:12px 18px;border-radius:14px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.85), rgba(255,255,255,0.7));
+      box-shadow: 0 10px 40px rgba(20,20,30,0.06);
+      position:sticky;top:12px;backdrop-filter:blur(6px);z-index:50;
+    }
+    .header-left{display:flex;align-items:center;gap:12px}
+    .logo svg{width:44px;height:44px;border-radius:10px;display:block}
+    .logo-text{line-height:1}
+    .brand{font-family:'Dancing Script',cursive;color:#2d5c4a;font-size:1.1rem;display:block}
+    .tag{font-size:0.78rem;color:var(--muted);display:block}
+
+    nav.topnav{display:flex;align-items:center;gap:12px}
+    nav.topnav a{color:inherit;text-decoration:none;font-weight:600;padding:6px 10px;border-radius:8px}
+    nav.topnav a:hover{background:rgba(0,0,0,0.03)}
+    .btn{background:#fff;border:none;padding:8px 12px;border-radius:10px;cursor:pointer;font-weight:700;box-shadow:0 8px 20px rgba(20,20,30,0.06)}
+    .btn.outline{background:transparent;border:1px solid rgba(0,0,0,0.06)}
+    .btn.small{padding:6px 10px;font-size:0.9rem}
+    .btn.tiny{padding:6px 8px;font-size:0.8rem}
+
+    /* Hero */
+    .hero{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:8px;padding:48px 18px;border-radius:14px;background: linear-gradient(180deg, rgba(255,255,255,0.92), rgba(255,255,255,0.86));box-shadow:0 12px 50px rgba(20,20,30,0.06)}
+    .site-title{font-family:'Dancing Script',cursive;color:#214a3a;font-size:2.4rem;margin:0}
+    .hero-sub{color:var(--muted);font-size:1rem;margin:0}
+
+    .quote-box{margin-top:12px;max-width:980px;padding:18px;border-radius:12px;background:var(--card-bg);box-shadow:0 10px 40px rgba(20,20,30,0.05)}
+    .quote-text{font-style:italic;font-size:1.15rem;color:#163724;margin:0;transition:color 0.3s,opacity 0.6s}
+    .quote-meta{display:flex;gap:10px;align-items:center;justify-content:center;margin-top:12px;color:var(--muted);font-size:0.9rem}
+
+    /* share buttons */
+    .share-btns{display:flex;gap:8px;align-items:center;justify-content:center;margin-top:10px}
+    .share-btn{border-radius:8px;padding:8px 10px;border:none;cursor:pointer;font-weight:700}
+    .wa{background:#25D366;color:#fff}
+    .x{background:#1DA1F2;color:#fff}
+    .fb{background:#1877F2;color:#fff}
+
+    /* Grid */
+    .container{max-width:1100px;margin:0 auto;width:100%}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:12px}
+    .card{border-radius:12px;padding:16px;background:var(--card-bg);backdrop-filter: blur(6px);box-shadow:0 8px 30px rgba(20,20,30,0.05);transition:transform .22s, box-shadow .22s}
+    .card:hover{transform:translateY(-6px);box-shadow:0 22px 50px rgba(18,30,22,0.08)}
+    .card h3{margin:0 0 8px 0;color:#23523f;font-size:1.05rem}
+    .card p{margin:0;color:#2d2d2d;line-height:1.45}
+    .card .card-actions{display:flex;justify-content:space-between;align-items:center;margin-top:12px;gap:8px}
+
+    /* subscription */
+    .subscribe-panel{margin:18px auto 8px;max-width:720px;padding:16px;border-radius:12px;background:linear-gradient(180deg,rgba(255,255,255,0.95),rgba(255,255,255,0.9));box-shadow:0 12px 40px rgba(20,20,30,0.06);display:flex;gap:12px;align-items:center;flex-wrap:wrap;justify-content:center}
+    .subscribe-panel input[type="email"]{padding:10px;border-radius:8px;border:1px solid rgba(0,0,0,0.08);min-width:260px}
+    .subscribe-panel .sub-success{color:var(--success);font-weight:700}
+    .subscribe-panel .sub-error{color:var(--danger);font-weight:700}
+
+    /* admin section (below content) - hidden by default */
+    #adminSection{display:none;margin-top:18px;padding:16px;border-radius:12px;background:linear-gradient(180deg,rgba(255,255,255,0.95),rgba(255,255,255,0.9));box-shadow:0 12px 40px rgba(20,20,30,0.06);max-width:1100px;margin-left:auto;margin-right:auto}
+    #adminSection h3{margin:0 0 8px 0}
+    .admin-form{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .admin-form textarea{grid-column:1 / -1}
+    .admin-actions{display:flex;gap:8px;margin-top:10px}
+    .admin-list{list-style:none;padding:0;margin:12px 0 0 0;max-height:240px;overflow:auto}
+    .admin-item{display:flex;align-items:flex-start;justify-content:space-between;padding:8px;border-radius:8px;background:rgba(245,245,245,0.7);margin-bottom:8px}
+
+    /* modal (login) */
+    .modal{position:fixed;inset:0;display:none;place-items:center;background:linear-gradient(180deg, rgba(20,20,30,0.25), rgba(20,20,30,0.28));z-index:90}
+    .modal-card{width:360px;max-width:94%;background:linear-gradient(180deg,rgba(255,255,255,0.98),rgba(255,255,255,0.95));padding:18px;border-radius:12px;box-shadow:0 18px 60px rgba(10,10,20,0.12)}
+    .muted{color:var(--muted)}
+    .small{font-size:0.85rem}
+
+    /* animations */
+    .fade-in{opacity:0;transform:translateY(8px);animation:inUp .7s forwards}
+    @keyframes inUp{to{opacity:1;transform:none}}
+
+    /* responsive */
+    @media (max-width:1000px){ .grid{grid-template-columns:repeat(2,1fr)} .admin-form{grid-template-columns:1fr} }
+    @media (max-width:640px){
+      .site-header{flex-direction:column;align-items:flex-start;gap:10px}
+      .grid{grid-template-columns:1fr}
+      .hero{padding:28px 12px}
+      .site-title{font-size:1.8rem}
+      .subscribe-panel{flex-direction:column;gap:10px}
+    }
+
+    /* dark mode: ensure text visible */
+    body.dark{background: linear-gradient(120deg,#0f1720,#162127,#1b1f29);color:#eefcf1}
+    body.dark .site-header{background: linear-gradient(180deg, rgba(10,10,12,0.55), rgba(10,10,12,0.35));color:#fff}
+    body.dark .brand{color:#dff1e2}
+    body.dark .tag{color:#b9c4bd}
+    body.dark .hero{background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02))}
+    body.dark .quote-text{color:#f0fff4}
+    body.dark .card{background: linear-gradient(180deg, rgba(20,22,24,0.65), rgba(20,22,24,0.55)); color:#eef7ee}
+    body.dark .card h3{color:#eaf6e6}
+    body.dark .muted{color:#aac0b0}
+    body.dark .admin-panel, body.dark .modal-card{background: linear-gradient(180deg, rgba(18,18,20,0.82), rgba(18,18,20,0.7)); color:#eef7ee}
+    body.dark .btn{background: rgba(255,255,255,0.06); color:#f4f4f6; border:1px solid rgba(255,255,255,0.04)}
+  </style>
+</head>
+<body>
+
+  <div class="page">
+
+    <!-- header -->
+    <header class="site-header" role="banner">
+      <div class="header-left" style="gap:12px">
+        <a class="logo" href="#" aria-label="MindBloom home">
+          <svg viewBox="0 0 64 64" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="lg1" x1="0" x2="1"><stop offset="0" stop-color="#bde7d8"/><stop offset="1" stop-color="#f5d6f0"/></linearGradient></defs>
+            <g transform="translate(0,0)"><circle cx="32" cy="24" r="8" fill="url(#lg1)"/><path d="M32 4 C27 4 16 12 16 18 C16 24 22 28 24 30 C26 32 32 32 32 32 C32 32 38 32 40 30 C42 28 48 24 48 18 C48 12 37 4 32 4 Z" fill="#d9f1e8" opacity="0.95"/></g>
+          </svg>
+        </a>
+        <div class="logo-text">
+          <span class="brand">MindBloom</span>
+          <small class="tag">Good Thought Everyday</small>
+        </div>
+      </div>
+
+      <nav class="topnav" role="navigation" aria-label="top navigation">
+        <a href="#thoughts">Thoughts</a>
+        <a href="#about">About</a>
+        <button id="themeToggle" class="btn small" aria-pressed="false">🌙 Dark Mode</button>
+        <button id="openLogin" class="btn small outline" title="Owner login (sahil)">🔒 Owner Login</button>
+      </nav>
+    </header>
+
+    <!-- hero -->
+    <section class="hero container" role="region" aria-labelledby="heroTitle">
+      <h1 id="heroTitle" class="site-title fade-in">Good Thought Everyday</h1>
+      <p class="hero-sub muted">A gentle place for mindful moments — short thoughts to brighten your day.</p>
+
+      <div class="quote-box" aria-live="polite">
+        <p id="quoteText" class="quote-text">“Start each day with a positive thought and a grateful heart.”</p>
+        <div class="quote-meta">
+          <button id="prev" class="btn outline small">⟵</button>
+          <button id="next" class="btn small">⟶</button>
+          <span class="small muted">Auto rotates every 5 seconds</span>
+        </div>
+
+        <!-- share buttons for current quote -->
+        <div class="share-btns" aria-hidden="false">
+          <button id="shareWhats" class="share-btn wa" title="Share on WhatsApp">WhatsApp</button>
+          <button id="shareX" class="share-btn x" title="Share on X / Twitter">X / Twitter</button>
+          <button id="shareFb" class="share-btn fb" title="Share on Facebook">Facebook</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- grid of thoughts -->
+    <main class="container" id="mainContent">
+      <section id="thoughts" class="grid" aria-live="polite" aria-label="Thoughts list">
+        <!-- cards injected here -->
+      </section>
+
+      <section id="about" style="margin-top:18px; padding:16px; border-radius:12px; background:linear-gradient(180deg,rgba(255,255,255,0.9), rgba(255,255,255,0.85)); box-shadow:0 8px 30px rgba(20,20,30,0.04);">
+        <h3 style="margin:0 0 8px 0; color:#23523f">About</h3>
+        <p style="margin:0;color:var(--muted)">MindBloom — Good Thought Everyday is a calm corner created by Sahil to share short, uplifting thoughts. Click Owner Login to manage thoughts (owner-only).</p>
+      </section>
+
+      <!-- subscription (bottom area) -->
+      <section class="subscribe-panel" aria-label="Email subscription">
+        <input id="subEmail" type="email" placeholder="Enter your email to subscribe (local save)" aria-label="Email address"/>
+        <button id="subBtn" class="btn">Subscribe</button>
+        <div id="subMsg" aria-live="polite" style="min-width:220px;text-align:center;font-weight:700"></div>
+      </section>
+
+      <!-- ADMIN SECTION: separate page/section below content (hidden until login) -->
+      <section id="adminSection" aria-hidden="true">
+        <h3>Admin — Manage Thoughts & Subscribers</h3>
+
+        <div class="admin-form">
+          <input id="inputTitle" placeholder="Title (optional)" />
+          <div></div>
+          <textarea id="inputText" rows="4" placeholder="Write your thought..."></textarea>
+        </div>
+
+        <div class="admin-actions" style="margin-top:12px">
+          <button id="addThought" class="btn">Add Thought</button>
+          <button id="saveEdit" class="btn outline" style="display:none">Save Edit</button>
+          <button id="clearAll" class="btn outline">Clear All Thoughts</button>
+          <button id="exportSubs" class="btn" title="Export subscribers CSV">📤 Export Subscribers (CSV)</button>
+        </div>
+
+        <h4 style="margin-top:14px">Saved Thoughts</h4>
+        <ul id="adminList" class="admin-list" aria-label="Admin saved thoughts"></ul>
+
+        <h4 style="margin-top:12px">Subscribers (local)</h4>
+        <ul id="subList" class="admin-list" aria-label="Subscribers list"></ul>
+        <p class="muted small" style="margin-top:8px">Export includes the subscriber email + date & time (local entries).</p>
+      </section>
+
+    </main>
+
+    <footer class="site-footer">
+      © <span id="year"></span> MindBloom — Good Thought Everyday • Designed by Sahil
+    </footer>
+
+    <!-- LOGIN MODAL -->
+    <div id="loginModal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="loginTitle">
+      <div class="modal-card" role="document">
+        <h3 id="loginTitle" style="margin:0 0 6px 0">Owner Login</h3>
+        <p class="muted small" style="margin:0 0 12px 0">Enter owner credentials to open Admin Section. (Username: <strong>sahil</strong>)</p>
+        <input id="loginUser" placeholder="Username" style="width:100%;padding:10px;border-radius:8px;border:1px solid rgba(0,0,0,0.08);margin-bottom:8px" />
+        <input id="loginPass" placeholder="Password" type="password" style="width:100%;padding:10px;border-radius:8px;border:1px solid rgba(0,0,0,0.08);margin-bottom:8px" />
+        <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:8px">
+          <button id="loginCancel" class="btn outline">Cancel</button>
+          <button id="loginSubmit" class="btn">Unlock</button>
+        </div>
+        <p class="muted small" style="margin-top:10px">Change credentials inside the JS variables if desired.</p>
+      </div>
+    </div>
+
+  </div> <!-- /.page -->
+
+<script>
+/* ========= CONFIG ========= */
+const ADMIN_USER = "sahil";
+const ADMIN_PASS = "mindbloom123";
+const STORAGE_KEY = "goodthoughts_v1";
+const THEME_KEY = "goodthoughts_theme";
+const SUB_KEY = "goodthoughts_subscribers_v1";
+const AUTO_INTERVAL = 5000;
+
+/* ========= DEFAULT THOUGHTS ========= */
+const defaultThoughts = [
+  { title: "Be Positive Always", text: "Every morning is a new chance to make your life brighter. Smile, stay calm, and believe good things are coming." },
+  { title: "Spread Kindness", text: "Kindness costs nothing but gives everything. One kind word can change someone’s whole day." },
+  { title: "Believe in Yourself", text: "Don’t doubt your power. You have everything inside you to create the life you dream of." },
+  { title: "Gratitude", text: "Start each day with a grateful heart — it changes how you see the world." },
+  { title: "Small Steps", text: "Every small step counts towards big change — keep moving forward." }
+];
+
+/* ========= STORAGE HELPERS ========= */
+function loadThoughts(){
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if(!raw) return defaultThoughts.slice();
+    const parsed = JSON.parse(raw);
+    if(!Array.isArray(parsed)) return defaultThoughts.slice();
+    return parsed;
+  }catch(e){
+    console.error("loadThoughts error:", e);
+    return defaultThoughts.slice();
+  }
+}
+function saveThoughts(arr){ try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(arr)); }catch(e){ console.error(e) } }
+
+function loadSubscribers(){
+  try{
+    const raw = localStorage.getItem(SUB_KEY);
+    if(!raw) return [];
+    const parsed = JSON.parse(raw);
+    if(!Array.isArray(parsed)) return [];
+    return parsed;
+  }catch(e){ console.error(e); return []; }
+}
+function saveSubscribers(arr){ try{ localStorage.setItem(SUB_KEY, JSON.stringify(arr)); }catch(e){ console.error(e) } }
+
+/* ========= APP STATE ========= */
+let thoughts = loadThoughts();
+let quoteIndex = 0;
+let autoTimer = null;
+
+/* ========= DOM refs ========= */
+const quoteText = document.getElementById("quoteText");
+const prevBtn = document.getElementById("prev");
+const nextBtn = document.getElementById("next");
+const grid = document.getElementById("thoughts");
+const yearEl = document.getElementById("year");
+const themeToggle = document.getElementById("themeToggle");
+
+const openLoginBtn = document.getElementById("openLogin");
+const loginModal = document.getElementById("loginModal");
+const loginUser = document.getElementById("loginUser");
+const loginPass = document.getElementById("loginPass");
+const loginSubmit = document.getElementById("loginSubmit");
+const loginCancel = document.getElementById("loginCancel");
+
+const adminSection = document.getElementById("adminSection");
+const addThoughtBtn = document.getElementById("addThought");
+const clearAllBtn = document.getElementById("clearAll");
+const adminList = document.getElementById("adminList");
+const inputTitle = document.getElementById("inputTitle");
+const inputText = document.getElementById("inputText");
+const saveEditBtn = document.getElementById("saveEdit");
+const closeAdminBtn = document.getElementById("closeAdmin");
+const exportSubsBtn = document.getElementById("exportSubs");
+const subListEl = document.getElementById("subList");
+
+const subEmail = document.getElementById("subEmail");
+const subBtn = document.getElementById("subBtn");
+const subMsg = document.getElementById("subMsg");
+
+const shareWhats = document.getElementById("shareWhats");
+const shareX = document.getElementById("shareX");
+const shareFb = document.getElementById("shareFb");
+
+/* ========= RENDER ========= */
+function renderQuote(){
+  if(!thoughts.length){ quoteText.textContent = "Stay calm — add the first thought, Sahil."; return; }
+  animateQuoteChange(thoughts[quoteIndex].text || thoughts[quoteIndex]);
+}
+function animateQuoteChange(text){
+  quoteText.style.opacity = "0";
+  setTimeout(()=>{ quoteText.textContent = `“${text}”`; quoteText.style.opacity="1"; }, 300);
+}
+
+function renderGrid(){
+  grid.innerHTML = "";
+  thoughts.forEach((t, idx)=>{
+    const card = document.createElement("article");
+    card.className = "card fade-in";
+    const titleHtml = t.title ? `<h3>${escapeHtml(t.title)}</h3>` : "";
+    // share buttons for each card: include the thought text
+    const shareHtml = `
+      <div class="card-actions">
+        <div style="display:flex;gap:8px">
+          <button class="btn tiny wa-card" data-text="${encodeURIComponent(t.text)}">WhatsApp</button>
+          <button class="btn tiny x-card" data-text="${encodeURIComponent(t.text)}">X</button>
+          <button class="btn tiny fb-card" data-text="${encodeURIComponent(t.text)}">Facebook</button>
+        </div>
+        <small class="muted">#${idx+1}</small>
+      </div>
+    `;
+    card.innerHTML = `${titleHtml}<p>${escapeHtml(t.text)}</p>${shareHtml}`;
+    grid.appendChild(card);
+  });
+
+  // wire card share buttons
+  document.querySelectorAll('.wa-card').forEach(btn=>{
+    btn.addEventListener('click', ()=> shareToWhats(decodeURIComponent(btn.dataset.text)));
+  });
+  document.querySelectorAll('.x-card').forEach(btn=>{
+    btn.addEventListener('click', ()=> shareToX(decodeURIComponent(btn.dataset.text)));
+  });
+  document.querySelectorAll('.fb-card').forEach(btn=>{
+    btn.addEventListener('click', ()=> shareToFb(decodeURIComponent(btn.dataset.text)));
+  });
+}
+
+function renderAdminList(){
+  adminList.innerHTML = "";
+  thoughts.forEach((t, idx)=>{
+    const li = document.createElement("li");
+    li.className = "admin-item";
+    li.innerHTML = `<div><strong>${escapeHtml(t.title || ("Thought " + (idx+1)))}</strong><div class="muted small" style="margin-top:6px">${escapeHtml(t.text)}</div></div><div style="display:flex;gap:6px;align-items:center"><button class="btn tiny" data-idx="${idx}" data-action="edit">Edit</button><button class="btn tiny outline" data-idx="${idx}" data-action="delete">Delete</button></div>`;
+    adminList.appendChild(li);
+  });
+
+  adminList.querySelectorAll("button").forEach(btn=>{
+    btn.addEventListener("click",(ev)=>{
+      const idx = Number(btn.dataset.idx);
+      const action = btn.dataset.action;
+      if(action === "delete"){
+        if(confirm("Delete this thought?")){ thoughts.splice(idx,1); saveThoughts(thoughts); renderAll(); }
+      } else if(action === "edit"){
+        inputTitle.value = thoughts[idx].title || "";
+        inputText.value = thoughts[idx].text || "";
+        addThoughtBtn.dataset.editing = idx;
+        addThoughtBtn.textContent = "Save Edit";
+        adminSection.scrollIntoView({behavior:"smooth",block:"center"});
+      }
+    });
+  });
+}
+
+/* ========= HELPERS ========= */
+function escapeHtml(str){
+  if(str === undefined || str === null) return "";
+  return String(str).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;");
+}
+function renderAll(){ renderQuote(); renderGrid(); renderAdminList(); renderSubscribersList(); }
+
+/* ========= AUTOROTATE ========= */
+function startAuto(){ stopAuto(); autoTimer = setInterval(()=>{ if(thoughts.length===0) return; quoteIndex = (quoteIndex+1)%thoughts.length; renderQuote(); }, AUTO_INTERVAL); }
+function stopAuto(){ if(autoTimer){ clearInterval(autoTimer); autoTimer = null; } }
+
+/* ========= THEME ========= */
+function loadTheme(){ const t = localStorage.getItem(THEME_KEY); if(t === "dark"){ document.body.classList.add("dark"); themeToggle.textContent = "☀️ Light Mode"; } }
+function toggleTheme(){ document.body.classList.toggle("dark"); const nowDark = document.body.classList.contains("dark"); themeToggle.textContent = nowDark ? "☀️ Light Mode" : "🌙 Dark Mode"; localStorage.setItem(THEME_KEY, nowDark ? "dark" : "light"); }
+
+/* ========= ADMIN LOGIN FLOW ========= */
+function openLogin(){ loginModal.style.display = "grid"; loginModal.setAttribute("aria-hidden","false"); loginUser.value=""; loginPass.value=""; loginUser.focus(); }
+function closeLogin(){ loginModal.style.display = "none"; loginModal.setAttribute("aria-hidden","true"); }
+function unlockIfValid(){ const u = (loginUser.value||"").trim(); const p = (loginPass.value||"").trim(); if(u === ADMIN_USER && p === ADMIN_PASS){ closeLogin(); openAdminSection(); return; } alert("Incorrect credentials."); }
+
+function openAdminSection(){
+  adminSection.style.display = "block";
+  adminSection.setAttribute("aria-hidden","false");
+  renderAdminList();
+  renderSubscribersList();
+  adminSection.scrollIntoView({behavior:"smooth",block:"start"});
+}
+function closeAdminSection(){
+  adminSection.style.display = "none";
+  adminSection.setAttribute("aria-hidden","true");
+  delete addThoughtBtn.dataset.editing;
+  addThoughtBtn.textContent = "Add Thought";
+  inputTitle.value=""; inputText.value="";
+}
+
+/* ========= SUBSCRIPTION (local + timestamp) ========= */
+function isValidEmail(email){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email); }
+function subscribeLocal(email){
+  const subs = loadSubscribers();
+  const already = subs.find(s => s.email.toLowerCase() === email.toLowerCase());
+  if(already) return { ok:false, msg:"You are already subscribed." };
+  const now = new Date();
+  const entry = { email, date: now.toISOString() };
+  subs.push(entry);
+  saveSubscribers(subs);
+  console.info("[MindBloom] New subscriber (local):", entry);
+  return { ok:true, msg:"Thank you! You are subscribed (saved locally)." };
+}
+function renderSubscribersList(){
+  const subs = loadSubscribers();
+  subListEl.innerHTML = "";
+  if(subs.length === 0){ subListEl.innerHTML = "<li class='muted'>No subscribers yet.</li>"; return; }
+  subs.forEach((s, idx)=>{
+    const li = document.createElement("li");
+    li.className = "admin-item";
+    li.innerHTML = `<div><strong>${escapeHtml(s.email)}</strong><div class="muted small" style="margin-top:6px">${new Date(s.date).toLocaleString()}</div></div><div style="display:flex;gap:6px;align-items:center"><button class="btn tiny outline" data-idx="${idx}" data-action="remove">Remove</button></div>`;
+    subListEl.appendChild(li);
+  });
+  // wire remove buttons
+  subListEl.querySelectorAll("button").forEach(btn=>{
+    btn.addEventListener("click", ()=>{
+      const idx = Number(btn.dataset.idx);
+      if(confirm("Remove this subscriber?")) {
+        const subs = loadSubscribers();
+        subs.splice(idx,1);
+        saveSubscribers(subs);
+        renderSubscribersList();
+      }
+    });
+  });
+}
+
+/* ========= CSV EXPORT ========= */
+function exportSubscribersCSV(){
+  const subs = loadSubscribers();
+  if(!subs.length){ alert("No subscribers to export."); return; }
+  // prepare CSV: header + rows (email, date_time)
+  const header = ["email","date_subscribed"];
+  const rows = subs.map(s => [s.email, s.date]);
+  const csvContent = [header, ...rows].map(r => r.map(cell => `"${String(cell).replaceAll('"','""')}"`).join(",")).join("\r\n");
+  const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+  const filename = `mindbloom_subscribers_${new Date().toISOString().slice(0,19).replaceAll(":", "-")}.csv`;
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.setAttribute("download", filename);
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+}
+
+/* ========= SHARE HELPERS ========= */
+function currentPageUrl(){ return window.location.href; }
+function shareToWhats(text){
+  const msg = `${text}\n\n— from Good Thought Everyday (${currentPageUrl()})`;
+  const url = `https://api.whatsapp.com/send?text=${encodeURIComponent(msg)}`;
+  window.open(url, '_blank');
+}
+function shareToX(text){
+  const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(currentPageUrl())}`;
+  window.open(url, '_blank');
+}
+function shareToFb(text){
+  const url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentPageUrl())}&quote=${encodeURIComponent(text)}`;
+  window.open(url, '_blank');
+}
+
+/* ========= EVENTS & INIT ========= */
+document.addEventListener("DOMContentLoaded",()=>{
+  document.getElementById("year").textContent = new Date().getFullYear();
+  renderAll();
+  startAuto();
+  loadTheme();
+});
+
+// quote manual controls
+prevBtn.addEventListener("click",()=>{ if(thoughts.length===0) return; quoteIndex = (quoteIndex - 1 + thoughts.length) % thoughts.length; renderQuote(); startAuto(); });
+nextBtn.addEventListener("click",()=>{ if(thoughts.length===0) return; quoteIndex = (quoteIndex + 1) % thoughts.length; renderQuote(); startAuto(); });
+
+// theme toggle
+themeToggle.addEventListener("click", ()=>{ document.body.classList.toggle("dark"); const nowDark = document.body.classList.contains("dark"); themeToggle.textContent = nowDark ? "☀️ Light Mode" : "🌙 Dark Mode"; localStorage.setItem(THEME_KEY, nowDark ? "dark" : "light"); });
+
+// login modal wiring
+openLoginBtn.addEventListener("click", openLogin);
+loginCancel.addEventListener("click", closeLogin);
+loginSubmit.addEventListener("click", unlockIfValid);
+loginPass.addEventListener("keydown", (e)=>{ if(e.key === "Enter") unlockIfValid(); });
+
+// admin panel wiring
+addThoughtBtn.addEventListener("click", ()=>{
+  const title = (inputTitle.value||"").trim();
+  const text = (inputText.value||"").trim();
+  if(!text){ alert("Please write a thought before saving."); return; }
+  if(addThoughtBtn.dataset.editing !== undefined){
+    const idx = Number(addThoughtBtn.dataset.editing);
+    thoughts[idx] = { title, text };
+    delete addThoughtBtn.dataset.editing;
+    addThoughtBtn.textContent = "Add Thought";
+  } else {
+    thoughts.unshift({ title, text });
+    quoteIndex = 0;
+  }
+  saveThoughts(thoughts);
+  renderAll();
+  inputTitle.value = ""; inputText.value = "";
+});
+
+clearAllBtn.addEventListener("click", ()=>{
+  if(!confirm("Clear ALL saved thoughts? This cannot be undone.")) return;
+  thoughts = [];
+  saveThoughts(thoughts);
+  renderAll();
+});
+
+// export subscribers
+exportSubsBtn.addEventListener("click", exportSubscribersCSV);
+
+// clicking outside modal closes
+window.addEventListener("click", (e)=>{ if(e.target === loginModal) closeLogin(); });
+window.addEventListener("keydown", (e)=>{ if(e.key === "Escape"){ closeLogin(); closeAdminSection(); } });
+
+// subscription wiring
+subBtn.addEventListener("click", ()=>{
+  const email = (subEmail.value||"").trim();
+  if(!isValidEmail(email)){ subMsg.textContent = "Please enter a valid email."; subMsg.className="sub-error"; return; }
+  const res = subscribeLocal(email);
+  if(res.ok){ subMsg.textContent = res.msg; subMsg.className="sub-success"; subEmail.value=""; renderSubscribersList(); }
+  else { subMsg.textContent = res.msg; subMsg.className="sub-error"; }
+  setTimeout(()=>{ subMsg.textContent=""; subMsg.className=""; }, 4500);
+});
+
+// share buttons for hero quote
+shareWhats.addEventListener("click", ()=>{ shareToWhats(thoughts[quoteIndex]?.text || quoteText.textContent); });
+shareX.addEventListener("click", ()=>{ shareToX(thoughts[quoteIndex]?.text || quoteText.textContent); });
+shareFb.addEventListener("click", ()=>{ shareToFb(thoughts[quoteIndex]?.text || quoteText.textContent); });
+
+// card share buttons wired during renderGrid()
+
+// utility: logo click scroll top
+document.querySelectorAll('.logo').forEach(el=>{ el.addEventListener('click',(e)=>{ e.preventDefault(); window.scrollTo({top:0,behavior:'smooth'}) }) });
+
+// small nicety: trim pasted input
+[inputTitle,inputText,loginUser,loginPass,subEmail].forEach(inp=>{ if(!inp) return; inp.addEventListener('paste',(ev)=>{ setTimeout(()=>{ ev.target.value = ev.target.value.trim(); },10); }); });
+
+/* ========= end ========= */
+</script>
+</body>
+</html>
